@@ -1,0 +1,23 @@
+{
+  "name": "hello_polymer",
+  "homepage": "https://github.com/luismiguel21/hello_polymer",
+  "description": "prueba de polymer",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "polymer",
+    "nodejs"
+  ],
+  "authors": [
+    "luis miguel echeverry"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
