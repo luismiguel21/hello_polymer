@@ -1,0 +1,11 @@
+body{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+paper-toolbar.main{
+	background-color: var(--paper-blue-700);
+}
+paper-toolbar.drawer{
+	background-color: var(--paper-red-500);
+}

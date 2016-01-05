@@ -1,10 +1,127 @@
 <html lang="en">
   <head>
- 
-    <link rel="import" href="proto-element.html">
+  	<title>Hello polymer</title>
+  	<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+  	<link rel="import" href="bower_components/polymer/polymer.html">   
+  	<link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  	<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  	<link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+  	<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+  	<link rel="import" href="bower_components/paper-styles/paper-styles.html">
+	
+  	<link rel="import" href="bower_components/neon-animation/neon-animations.html">
+  	<link rel="import" href="bower_components/neon-animation/neon-animated-pages.html">
+  	<link rel="import" href="animated-grid.html">
+    <link rel="import" href="fullsize-page-with-card.html">
+    <link rel="import" href="add-project.html">
+  
+  	<style is="custom-style">
+		body{
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+        	@apply(--layout-fullbleed);
+		}
+		 
+	    neon-animated-pages {
+	    	height: 100%;
+	    }
+		paper-toolbar.main{
+			background-color: var(--paper-indigo-700);
+		}
+		paper-toolbar.drawer{
+			background-color: var(--paper-indigo-500);
+		}
+		paper-fab.add{
+			z-index: 1;
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			box-shadow: 4px 4px 4px black;
+			background-color: var(--paper-indigo-500);
+		}
+
+  	</style>
+
   </head>
+
   <body>
-  hola
-    <proto-element></proto-element>
+  	<paper-drawer-panel>
+  		<div drawer>
+  			<paper-toolbar class="drawer">
+  				<span>Opciones</span>
+  			</paper-toolbar>
+  			<paper-toolbar class="tall drawer">
+  				<span>Contactos</span>
+  			</paper-toolbar>
+  		</div>
+  		<div main>
+	  		<paper-toolbar class="main">
+	  			<paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+	  				<span title class="flex">Mi tiempo</span>
+	  			<paper-icon-button icon="refresh" class="refresh"></paper-icon-button>
+	  		</paper-toolbar>
+	  		
+			 <section onclick="clickHandler(event)">
+			    <paper-fab icon="add" class="add"  data-dialog="animated"></paper-fab>
+			    <paper-dialog id="animated" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+			      <h2>Dialog Title</h2>
+			      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			    </paper-dialog>
+			  </section>
+			  
+  			<template is="dom-bind">
+		      <neon-animated-pages id="pages" selected="0">
+		        <animated-grid on-tile-click="_onTileClick"></animated-grid>
+		        <fullsize-page-with-card id="fullsize-card" hero-id="hero" on-click="_onFullsizeClick">
+		        </fullsize-page-with-card>
+		      </neon-animated-pages>
+		    </template>
+
+  		</div>
+
+
+
+  	</paper-drawer-panel>
+  	<example-element id="dialog"></example-element>
+
+  	
+
+    <script>
+      var scope = document.querySelector('template[is="dom-bind"]');
+      scope._onTileClick = function(event) {
+        this.$['fullsize-card'].color = event.detail.data.color;
+        this.$.pages.selected = 1;
+      };
+      scope._onFullsizeClick = function(event) {
+        this.$.pages.selected = 0;
+      };
+   
+    function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+  </script>
+
+
+  	
+
+  	
+
+
   </body>
+  
 </html>
