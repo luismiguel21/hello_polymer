@@ -1,0 +1,38 @@
+<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+
+<dom-module id="example-element">
+  <template>
+    <!-- Dialog -->
+    <paper-dialog id="contactDialog" modal>
+      <h2>Login</h2>
+      <paper-dialog-scrollable>
+        <form id="contact-form" autofocus>
+          <paper-input autofocus id="name" label="Your Name"></paper-input>
+          <paper-input id="email" label="Email Address"></paper-input>
+        </form>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm>Accept</paper-button>
+      </div>
+    </paper-dialog>
+    <!-- Button -->
+    <paper-button id="login"
+                  data-dialog="contactDialog"
+                  on-tap="openDialog">Login</paper-button>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    Polymer({
+      is: 'example-element',
+      properties: {
+
+      	
+      },
+      openDialog: function(){
+        this.$.contactDialog.open();
+      }
+    });
+  })();
+</script>
